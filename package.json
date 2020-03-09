@@ -4,7 +4,7 @@
   "description": "Musclefoods Vedning Machine Kata",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tests": "mocha --require ts-node/register tests/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/adobski/vending-machine-kata/issues"
   },
-  "homepage": "https://github.com/adobski/vending-machine-kata#readme"
+  "homepage": "https://github.com/adobski/vending-machine-kata#readme",
+  "devDependencies": {
+    "@types/chai": "^4.2.10",
+    "@types/mocha": "^7.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^7.1.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.3"
+  }
 }
