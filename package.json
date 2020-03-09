@@ -1,0 +1,20 @@
+{
+  "name": "vending-machine-kata",
+  "version": "1.0.0",
+  "description": "Musclefoods Vedning Machine Kata",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adobski/vending-machine-kata.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adobski/vending-machine-kata/issues"
+  },
+  "homepage": "https://github.com/adobski/vending-machine-kata#readme"
+}
