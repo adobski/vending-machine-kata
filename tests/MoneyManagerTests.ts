@@ -13,4 +13,12 @@ describe('MoneyManagerTests', () => {
 
         expect(value).to.equal(0.30);
     });
+
+    it('should hold retured coins', () => {
+        const moneyManager = new MoneyManager();
+
+        let value = moneyManager.insertCoin('pennie');
+
+        expect(moneyManager.getReturnedCoins().length).to.equal(1);
+    });
 });
