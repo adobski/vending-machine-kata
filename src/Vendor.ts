@@ -7,7 +7,7 @@ export class Vendor implements IVendor{
     private productManager: IProductManager;
     private moneyManager: IMoneyManager;
     totalCoinValue: number;
-    returnedCoins: string[];
+    //getRreturnedCoins: string[];
     private displayMessage: string;
     
     constructor(
@@ -17,7 +17,7 @@ export class Vendor implements IVendor{
         this.productManager = productManager;
         this.moneyManager = moneyManager;
 
-        this.returnedCoins = [];
+        //this.returnedCoins = [];
         this.totalCoinValue = 0.00;
 
         this.setDisplay('INSERT COIN');
@@ -32,16 +32,12 @@ export class Vendor implements IVendor{
     }
 
     insertCoin(coin: string){
-        
-        if(coin === 'nickle' || coin === 'dime' || coin === 'quarter')
-        {
-            this.totalCoinValue = this.moneyManager.insertCoin(coin);       
-        }
-        else
-            this.returnedCoins.push(coin);
-
-              
+        this.totalCoinValue = this.moneyManager.insertCoin(coin);
         this.setDisplay('$' + this.totalCoinValue.toFixed(2));
+    }
+
+    getReturnedCoins():string[]{
+        return this.moneyManager.getReturnedCoins();
     }
     
     select(product: IProduct, money: number){

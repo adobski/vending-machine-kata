@@ -7,7 +7,7 @@ export interface IVendor{
     select(product: IProduct, money: number);
     resetDispenser();
     totalCoinValue: number;
-    returnedCoins: string[];
+    getReturnedCoins():string[];
     
 }
     

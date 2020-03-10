@@ -3,14 +3,25 @@ import { IMoneyManager } from './abstraction/IMoneyManager';
 export class MoneyManager implements IMoneyManager{
     constructor(){
         this.totalCoinValue = 0.00;
+        this.returnedCoins = [];
     }
-       
+
+    private returnedCoins: string[];
     private totalCoinValue: number;
 
     insertCoin(coin: string): number{
-        this.setValue(coin);  
+        if(coin === 'nickle' || coin === 'dime' || coin === 'quarter')
+        {
+            this.setValue(coin);     
+        }
+        else
+            this.returnedCoins.push(coin);
 
         return this.totalCoinValue;
+    }
+
+    getReturnedCoins():string[]{
+        return this.returnedCoins;
     }
 
     private setValue(coin: string) {
