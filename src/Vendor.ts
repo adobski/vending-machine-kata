@@ -46,10 +46,18 @@ export class Vendor implements IVendor{
     
     select(product: IProduct, money: number){
         let dispenser = this.productManager.select(product, money);
+        
+        this.checkOrder(product, money);
 
         if (dispenser.length > 0) {
             this.setDisplay("THANK YOU");
             this.totalCoinValue = 0;
+        }
+    }
+
+    checkOrder(product: IProduct, money: number){
+        if(money < product.price){
+            this.setDisplay("PRICE - " + (product.price - this.totalCoinValue));
         }
     }
 

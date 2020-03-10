@@ -79,4 +79,47 @@ describe('VendorTests', () => {
         expect(vendor.getDisplay()).to.equal("INSERT COIN");   
         expect(vendor.totalCoinValue).to.equal(0.00); 
     });
+
+    it('should diplay PRICE and amount if there is not enough money for the product', () => {
+        const vendor = new Vendor(
+            new ProductManager(), 
+            new MoneyManager());
+
+        vendor.insertCoin('quarter');
+        vendor.insertCoin('quarter');
+
+        const cola = new Cola();
+
+        vendor.select(cola, vendor.totalCoinValue);
+
+        expect(vendor.getDisplay()).to.equal('PRICE - ' + (cola.price - vendor.totalCoinValue));
+
+    });
+
+    it('should display PRICE - amount until we reach the correct amount', () =>{
+        const vendor = new Vendor(
+            new ProductManager(), 
+            new MoneyManager());
+
+        vendor.insertCoin('quarter');
+        vendor.insertCoin('quarter');
+
+        const cola = new Cola();
+
+        vendor.select(cola, vendor.totalCoinValue);
+
+        expect(vendor.getDisplay()).to.equal('PRICE - ' + (cola.price - vendor.totalCoinValue));
+        
+        vendor.insertCoin('quarter');
+        vendor.select(cola, vendor.totalCoinValue);
+        expect(vendor.getDisplay()).to.equal('PRICE - ' + (cola.price - vendor.totalCoinValue));
+        
+        vendor.insertCoin('quarter');
+        vendor.select(cola, vendor.totalCoinValue);
+        expect(vendor.getDisplay()).to.equal('THANK YOU');
+    });
+
+    it('should return change when the amount of coins is greater than the price', () => {
+
+    });
 });

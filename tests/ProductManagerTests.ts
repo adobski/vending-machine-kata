@@ -25,5 +25,14 @@ describe('ProductManagerTests', () => {
         productManager.resetDispenser();
 
         expect(productManager.dispenser.length).to.equal(0);
-    })
+    });
+
+    it('should not populate the dispenser if there is not enough money for the product', () => {
+        const selectedProduct = new Cola();
+        
+        const productManager = new ProductManager();
+        productManager.select(selectedProduct, 0.50)
+
+        expect(productManager.dispenser.length).to.equal(0);
+    });
 });

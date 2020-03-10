@@ -10,9 +10,10 @@ export class ProductManager implements IProductManager{
 
     select(product: IProduct, money: number): IProduct[]{
                
-        if(money <= product.price){
+        if(money >= product.price){
             this.dispenser.push(product);
         }
+        
         return this.dispenser;
     }
 
