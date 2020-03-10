@@ -6,7 +6,7 @@ export interface IMoneyManager{
     getReturnedCoins():string[];
     getInsertedCoins(): Coin[]
     getTotalCoinValue(): number;
-    clear();
-    refund();
+    clear():void;
+    refund():void;
     pay(product: IProduct, money: number): number;
 }

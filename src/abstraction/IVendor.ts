@@ -6,9 +6,9 @@ export interface IVendor{
     display: IDisplay;
     insertCoin(coin: string);
     select(product: IProduct, money: number);
-    resetDispenser();
+    resetDispenser():void;
     getTotalCoinValue(): number;
     getReturnedCoins():string[];
-    refund();
+    refund():void;
 }
     

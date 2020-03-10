@@ -15,7 +15,7 @@ export class Display{
         this.displayMessage = value;
     }
 
-    checkOrder(product: IProduct, money: number, totalCoinValue){
+    checkOrder(product: IProduct, money: number, totalCoinValue: number){
         if(money < product.price){
             this.set("PRICE - " + (product.price - totalCoinValue));
         }
