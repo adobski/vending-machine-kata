@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Vendor, MoneyManager, ProductManager, Cola } from '../src';
+import { Vendor, MoneyManager, ProductManager, Cola, Candy } from '../src';
 import { Display } from '../src/Display';
 
 describe('VendorTests', () => {
@@ -59,7 +59,7 @@ describe('VendorTests', () => {
         vendor.insertCoin('quarter');
         vendor.insertCoin('quarter');
 
-        vendor.select(new Cola(), vendor.totalCoinValue);
+        vendor.select(new Cola(), vendor.getTotalCoinValue());
 
         expect(vendor.display.get()).to.equal('THANK YOU');
 
@@ -76,14 +76,14 @@ describe('VendorTests', () => {
         vendor.insertCoin('quarter');
         vendor.insertCoin('quarter');
 
-        vendor.select(new Cola(), vendor.totalCoinValue);
+        vendor.select(new Cola(), vendor.getTotalCoinValue());
 
         expect(vendor.display.get()).to.equal('THANK YOU');
 
         vendor.resetDispenser();
 
         expect(vendor.display.get()).to.equal("INSERT COIN");
-        expect(vendor.totalCoinValue).to.equal(0.00);
+        expect(vendor.getTotalCoinValue()).to.equal(0.00);
     });
 
     it('should diplay PRICE and amount if there is not enough money for the product', () => {
@@ -97,9 +97,9 @@ describe('VendorTests', () => {
 
         const cola = new Cola();
 
-        vendor.select(cola, vendor.totalCoinValue);
+        vendor.select(cola, vendor.getTotalCoinValue());
 
-        expect(vendor.display.get()).to.equal('PRICE - ' + (cola.price - vendor.totalCoinValue));
+        expect(vendor.display.get()).to.equal('PRICE - ' + (cola.price - vendor.getTotalCoinValue()));
 
     });
 
@@ -114,20 +114,52 @@ describe('VendorTests', () => {
 
         const cola = new Cola();
 
-        vendor.select(cola, vendor.totalCoinValue);
+        vendor.select(cola, vendor.getTotalCoinValue());
 
-        expect(vendor.display.get()).to.equal('PRICE - ' + (cola.price - vendor.totalCoinValue));
-
-        vendor.insertCoin('quarter');
-        vendor.select(cola, vendor.totalCoinValue);
-        expect(vendor.display.get()).to.equal('PRICE - ' + (cola.price - vendor.totalCoinValue));
+        expect(vendor.display.get()).to.equal('PRICE - ' + (cola.price - vendor.getTotalCoinValue()));
 
         vendor.insertCoin('quarter');
-        vendor.select(cola, vendor.totalCoinValue);
+        vendor.select(cola, vendor.getTotalCoinValue());
+        expect(vendor.display.get()).to.equal('PRICE - ' + (cola.price - vendor.getTotalCoinValue()));
+
+        vendor.insertCoin('quarter');
+        vendor.select(cola, vendor.getTotalCoinValue());
         expect(vendor.display.get()).to.equal('THANK YOU');
     });
 
-    // it('should return change when the amount of coins is greater than the price', () => {
+    it('should refund your money if you choose a refund', () =>{
+        const vendor = new Vendor(
+            new ProductManager(),
+            new MoneyManager(),
+            new Display());
 
-    // });
+        vendor.insertCoin('quarter');
+        vendor.insertCoin('quarter');
+        vendor.insertCoin('quarter');
+
+        expect(vendor.getTotalCoinValue()).to.equal(0.75);
+
+        vendor.refund();
+
+        expect(vendor.getTotalCoinValue()).to.equal(0.00);
+    });
+
+    it('should return change when the amount of coins is greater than the price', () => {
+        const vendor = new Vendor(
+            new ProductManager(),
+            new MoneyManager(),
+            new Display());
+
+        vendor.insertCoin('quarter');
+        vendor.insertCoin('quarter');
+        vendor.insertCoin('quarter');
+        vendor.insertCoin('quarter');
+        vendor.insertCoin('quarter');
+
+        expect(vendor.getTotalCoinValue()).to.equal(1.25);
+
+        vendor.select(new Candy(), vendor.getTotalCoinValue());
+
+        
+    });
 });

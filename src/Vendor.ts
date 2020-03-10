@@ -9,7 +9,7 @@ export class Vendor implements IVendor{
     private moneyManager: IMoneyManager;
     display: IDisplay;
     
-    totalCoinValue: number;
+    //totalCoinValue: number;
     
     constructor(
         productManager: IProductManager,
@@ -20,26 +20,36 @@ export class Vendor implements IVendor{
         this.moneyManager = moneyManager;
         this.display = display;
 
-        this.totalCoinValue = 0.00;
+        //this.totalCoinValue = 0.00;
     }
 
     insertCoin(coin: string){
-        this.totalCoinValue = this.moneyManager.insertCoin(coin);
-        this.display.set('$' + this.totalCoinValue.toFixed(2));
+        this.moneyManager.insertCoin(coin);
+        this.display.set('$' + this.getTotalCoinValue().toFixed(2));
+    }
+
+    refund(){
+        this.moneyManager.refund();
     }
 
     getReturnedCoins():string[]{
         return this.moneyManager.getReturnedCoins();
     }
+
+    getTotalCoinValue():number{
+        return this.moneyManager.getTotalCoinValue();
+    }
     
     select(product: IProduct, money: number){
         let dispenser = this.productManager.select(product, money);
+
+        this.moneyManager.pay(product, money);
         
-        this.display.checkOrder(product, money, this.totalCoinValue);
+        this.display.checkOrder(product, money, this.getTotalCoinValue());
 
         if (dispenser.length > 0) {
             this.display.set("THANK YOU");
-            this.totalCoinValue = 0;
+            this.moneyManager.clear();
         }
     }
 
