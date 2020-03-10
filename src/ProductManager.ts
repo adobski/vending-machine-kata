@@ -15,4 +15,8 @@ export class ProductManager implements IProductManager{
         }
         return this.dispenser;
     }
+
+    resetDispenser(){
+        this.dispenser = [];
+    }
 }

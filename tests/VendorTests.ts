@@ -60,7 +60,7 @@ describe('VendorTests', () => {
 
     })
 
-    it('should display INSERT COIN after a purchase has been made after THANK YOU', () =>{
+    it('should display INSERT COIN and reset coin amount after a purchase has been made', () =>{
         const vendor = new Vendor(
             new ProductManager(), 
             new MoneyManager());
@@ -73,6 +73,10 @@ describe('VendorTests', () => {
         vendor.select(new Cola(), vendor.totalCoinValue);
 
         expect(vendor.getDisplay()).to.equal('THANK YOU');
-        expect(vendor.getDisplay()).to.equal("INSERT COIN");    
+
+        vendor.resetDispenser();
+
+        expect(vendor.getDisplay()).to.equal("INSERT COIN");   
+        expect(vendor.totalCoinValue).to.equal(0.00); 
     });
 });
