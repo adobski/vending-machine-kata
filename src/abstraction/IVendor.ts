@@ -1,8 +1,12 @@
+import { IProduct } from './IProduct'; 
+
 export interface IVendor{
-   
-    returnedCoins: string[];
+    setDisplay(value: string);
+    getDisplay(): string;
+    insertCoin(coin: string);
+    select(product: IProduct, money: number);
     totalCoinValue: number;
-    display: string;
+    returnedCoins: string[];
     
-    insertCoin(coin: string): string;
 }
+    
